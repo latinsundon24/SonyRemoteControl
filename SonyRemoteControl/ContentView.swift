@@ -62,12 +62,6 @@ struct ContentView: View {
                             .padding(.horizontal)
                     }
 
-                    // 数字键盘（由「数字键」按钮显示/隐藏）
-                    if showNumberPad {
-                        numberPad
-                            .transition(.opacity.combined(with: .move(edge: .bottom)))
-                    }
-
                     Spacer(minLength: 20)
                 }
                 .padding(.vertical)
@@ -75,6 +69,9 @@ struct ContentView: View {
             .navigationTitle("索尼电视遥控器")
             .sheet(isPresented: $showingSettings) {
                 SettingsView()
+            }
+            .sheet(isPresented: $showNumberPad) {
+                numberPadSheet
             }
         }
     }
@@ -105,25 +102,46 @@ struct ContentView: View {
                 RemoteButton(title: cmd.title, symbol: cmd.symbol, action: { press(cmd) })
             }
             RemoteButton(
-                title: showNumberPad ? "收起" : "数字键",
+                title: "数字键",
                 symbol: "keyboard",
                 color: .orange,
-                action: { withAnimation(.easeInOut(duration: 0.25)) { showNumberPad.toggle() } }
+                action: { showNumberPad = true }
             )
         }
         .padding(.horizontal)
     }
 
-    // 数字键盘（显示时）
-    private var numberPad: some View {
+    // 数字键盘（弹窗内容）
+    private var numberPadSheet: some View {
         let items = IRCC.all.filter { $0.group == .number }
         let cols = Array(repeating: GridItem(.flexible(), spacing: 14), count: 3)
-        return LazyVGrid(columns: cols, spacing: 14) {
-            ForEach(items) { cmd in
-                RemoteButton(title: cmd.title, symbol: cmd.symbol, action: { press(cmd) })
+        return VStack(spacing: 16) {
+            HStack {
+                Text("数字键盘")
+                    .font(.headline)
+                Spacer()
+                Text(status)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Spacer()
+                Button { showNumberPad = false } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title2)
+                        .foregroundColor(.secondary)
+                }
             }
+            .padding(.horizontal)
+
+            LazyVGrid(columns: cols, spacing: 14) {
+                ForEach(items) { cmd in
+                    RemoteButton(title: cmd.title, symbol: cmd.symbol, action: { press(cmd) })
+                }
+            }
+            .padding(.horizontal)
+
+            Spacer()
         }
-        .padding(.horizontal)
+        .padding(.top, 20)
     }
 
     private func press(_ cmd: RemoteCommand) {
