@@ -33,7 +33,10 @@ enum IRCC {
     static let back        = "AAAAAgAAAJcAAAAjAw=="   // 返回
     static let home        = "AAAAAQAAAAEAAABgAw=="   // 主页
     static let settings    = "AAAAAgAAAJcAAAA2Aw=="   // 设置（Options）
-    static let menu        = "AAAAAgAAAMQAAABLAw=="    // 菜单（Action Menu）
+    static let input       = "AAAAAgAAABEAAAAAA"      // 输入选择（Input 源切换）
+
+    // 电视键：切到电视广播输入（TV / テレビ）
+    static let tv          = "AAAAAQAAAAEAAAAkAw=="
 
     // 音量
     static let volumeUp    = "AAAAAQAAAAEAAAASAw=="
@@ -58,6 +61,7 @@ enum IRCC {
     /// 界面所需的全部按键（顺序即布局顺序）
     static let all: [RemoteCommand] = [
         .init(title: "电源", symbol: "power", code: power, group: .power),
+        .init(title: "电视", symbol: "tv",    code: tv,    group: .power),
 
         .init(title: "↑",  symbol: "chevron.up",    code: up,      group: .dpad),
         .init(title: "←",  symbol: "chevron.left",  code: left,    group: .dpad),
@@ -68,7 +72,7 @@ enum IRCC {
         .init(title: "返回", symbol: "arrow.uturn.left", code: back,     group: .top),
         .init(title: "主页", symbol: "house",            code: home,     group: .top),
         .init(title: "设置", symbol: "gearshape",        code: settings, group: .top),
-        .init(title: "菜单", symbol: "ellipsis.circle",  code: menu,     group: .top),
+        .init(title: "输入", symbol: "rectangle.on.rectangle", code: input, group: .top),
 
         .init(title: "音量-", symbol: "volume.down", code: volumeDown, group: .volume),
         .init(title: "静音",  symbol: "speaker.slash", code: mute,      group: .volume),

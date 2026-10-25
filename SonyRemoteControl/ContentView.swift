@@ -30,17 +30,21 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
 
-                    // 电源
-                    if let cmd = IRCC.all.first(where: { $0.group == .power }) {
-                        RemoteButton(title: cmd.title, symbol: cmd.symbol,
-                                     color: .red, action: { press(cmd) })
-                            .padding(.horizontal)
+                    // 电源 + 电视键
+                    HStack(spacing: 14) {
+                        ForEach(IRCC.all.filter { $0.group == .power }) { cmd in
+                            let isPower = cmd.code == IRCC.power
+                            RemoteButton(title: cmd.title, symbol: cmd.symbol,
+                                         color: isPower ? .red : .blue,
+                                         action: { press(cmd) })
+                        }
                     }
+                    .padding(.horizontal)
 
                     // 方向键
                     dpad
 
-                    // 顶部功能键（返回/主页/设置/菜单 + 数字键盘开关）
+                    // 顶部功能键（返回/主页/设置/输入 + 数字键盘开关）
                     topRow
 
                     // 音量
