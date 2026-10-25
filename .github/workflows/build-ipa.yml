@@ -26,6 +26,9 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
+      - name: Generate App Icon set
+        run: bash scripts/make-appicon.sh
+
       - name: Archive (no signing)
         run: |
           set -euo pipefail

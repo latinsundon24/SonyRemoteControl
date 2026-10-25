@@ -9,19 +9,19 @@ struct RemoteButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 4) {
+            VStack(spacing: 6) {
                 if let symbol = symbol {
                     Image(systemName: symbol)
-                        .font(.title3)
+                        .font(.title2)
                 }
                 Text(title)
-                    .font(.caption)
-                    .fontWeight(.medium)
+                    .font(.callout)
+                    .fontWeight(.semibold)
             }
-            .frame(maxWidth: .infinity, minHeight: 50)
+            .frame(maxWidth: .infinity, minHeight: 64)
             .background(color.opacity(0.15))
             .foregroundColor(color)
-            .cornerRadius(12)
+            .cornerRadius(16)
         }
         .buttonStyle(.plain)
     }

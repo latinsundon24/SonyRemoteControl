@@ -34,7 +34,6 @@ enum IRCC {
     static let home        = "AAAAAQAAAAEAAABgAw=="   // 主页
     static let settings    = "AAAAAgAAAJcAAAA2Aw=="   // 设置（Options）
     static let menu        = "AAAAAgAAAMQAAABLAw=="    // 菜单（Action Menu）
-    static let quickSelect = "AAAAAgAAABoAAAB5Aw=="    // 快捷选择（按机型可微调）
 
     // 音量
     static let volumeUp    = "AAAAAQAAAAEAAAASAw=="
@@ -70,7 +69,6 @@ enum IRCC {
         .init(title: "主页", symbol: "house",            code: home,     group: .top),
         .init(title: "设置", symbol: "gearshape",        code: settings, group: .top),
         .init(title: "菜单", symbol: "ellipsis.circle",  code: menu,     group: .top),
-        .init(title: "快捷", symbol: "bolt",             code: quickSelect, group: .top),
 
         .init(title: "音量-", symbol: "volume.down", code: volumeDown, group: .volume),
         .init(title: "静音",  symbol: "speaker.slash", code: mute,      group: .volume),
