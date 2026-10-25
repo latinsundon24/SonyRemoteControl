@@ -26,26 +26,29 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
-      - name: Build (verify compilation, no signing)
+      - name: Archive (no signing)
         run: |
           set -euo pipefail
-          xcodebuild build \
+          xcodebuild archive \
             -project SonyRemoteControl.xcodeproj \
             -scheme SonyRemoteControl \
             -sdk iphoneos \
             -configuration Release \
+            -archivePath build/SonyRemoteControl.xcarchive \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGN_IDENTITY=""
 
-      - name: Package unsigned IPA (download only, not installable)
+      - name: Package unsigned IPA (structure complete, not installable)
         run: |
           set -euo pipefail
-          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "SonyRemoteControl.app" -type d | head -n 1)
-          if [ -z "$APP_PATH" ]; then echo "App bundle not found"; exit 1; fi
+          APP_PATH="build/SonyRemoteControl.xcarchive/Products/Applications/SonyRemoteControl.app"
+          if [ ! -d "$APP_PATH" ]; then echo "App bundle not found in archive"; exit 1; fi
           mkdir -p build/Payload
           cp -R "$APP_PATH" build/Payload/
           (cd build && zip -r SonyRemoteControl-unsigned.ipa Payload)
           echo "Created build/SonyRemoteControl-unsigned.ipa"
+          echo "--- IPA 内容清单 ---"
+          unzip -l build/SonyRemoteControl-unsigned.ipa
 
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
