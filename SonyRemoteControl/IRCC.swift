@@ -35,7 +35,7 @@ enum IRCC {
     static let settings    = "AAAAAgAAAJcAAAA2Aw=="   // 设置（Options）
     static let input       = "AAAAAQAAAAEAAAAlAw=="   // 输入选择（Input 源切换）
     static let display     = "AAAAAQAAAAEAAAA6Aw=="   // 屏显（On-Screen Display / 画面显示）
-    static let menu        = "AAAAAgAAAMQAAABLAw=="   // 菜单（Action Menu / 操作菜单）
+    static let menu        = "AAAAAgAAAMQAAABPAw=="   // 菜单（Action Menu / 操作菜单）
 
     // 电视键：切到电视广播输入（TV / テレビ）
     static let tv          = "AAAAAQAAAAEAAAAkAw=="
