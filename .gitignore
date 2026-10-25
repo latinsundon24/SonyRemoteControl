@@ -1,0 +1,13 @@
+# Xcode / iOS
+*.xcodeproj/
+*.xcworkspace/
+xcshareddata/
+DerivedData/
+build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+.DS_Store
+
+# Local only
+*.xcconfig
