@@ -44,7 +44,7 @@ struct ContentView: View {
                     // 方向键
                     dpad
 
-                    // 顶部功能键（返回/主页/设置/输入 + 数字键盘开关）
+                    // 顶部功能键（返回/主页/设置/输入选择/屏显/菜单 + 数字键盘开关）
                     topRow
 
                     // 音量
@@ -54,13 +54,6 @@ struct ContentView: View {
                         }
                     }
                     .padding(.horizontal)
-
-                    // 语音
-                    if let cmd = IRCC.all.first(where: { $0.group == .voice }) {
-                        RemoteButton(title: cmd.title, symbol: cmd.symbol,
-                                     color: .purple, action: { press(cmd) })
-                            .padding(.horizontal)
-                    }
 
                     Spacer(minLength: 20)
                 }
@@ -95,9 +88,10 @@ struct ContentView: View {
         .padding(.horizontal)
     }
 
-    // 顶部功能键：4 个 IRCC 键 + 数字键盘开关键
+    // 顶部功能键：返回/主页/设置/输入选择/屏显/菜单 + 数字键盘开关键（4 列网格自适应换行）
     private var topRow: some View {
-        HStack(spacing: 14) {
+        let cols = Array(repeating: GridItem(.flexible(), spacing: 14), count: 4)
+        return LazyVGrid(columns: cols, spacing: 14) {
             ForEach(IRCC.all.filter { $0.group == .top }) { cmd in
                 RemoteButton(title: cmd.title, symbol: cmd.symbol, action: { press(cmd) })
             }

@@ -2,7 +2,7 @@ import Foundation
 
 /// 按键分组，用于界面布局
 enum RemoteGroup {
-    case power, dpad, top, volume, voice, number
+    case power, dpad, top, volume, number
 }
 
 /// 遥控指令定义（标题 + 图标 + IRCC 码 + 分组）
@@ -33,7 +33,9 @@ enum IRCC {
     static let back        = "AAAAAgAAAJcAAAAjAw=="   // 返回
     static let home        = "AAAAAQAAAAEAAABgAw=="   // 主页
     static let settings    = "AAAAAgAAAJcAAAA2Aw=="   // 设置（Options）
-    static let input       = "AAAAAgAAAMQAAABLAw=="   // 快速设置（Quick Settings）
+    static let input       = "AAAAAQAAAAEAAAAlAw=="   // 输入选择（Input 源切换）
+    static let display     = "AAAAAQAAAAEAAAA6Aw=="   // 屏显（On-Screen Display / 画面显示）
+    static let menu        = "AAAAAgAAAMQAAABLAw=="   // 菜单（Action Menu / 操作菜单）
 
     // 电视键：切到电视广播输入（TV / テレビ）
     static let tv          = "AAAAAQAAAAEAAAAkAw=="
@@ -43,8 +45,9 @@ enum IRCC {
     static let volumeDown  = "AAAAAQAAAAEAAAATAw=="
     static let mute        = "AAAAAQAAAAEAAAAUAw=="
 
-    // 语音
-    static let voice       = "AAAAAgAAABoAAAB9Aw=="    // 语音/助手（best-effort）
+    // 语音（已取消）
+    // static let voice    = "AAAAAgAAABoAAAB9Aw=="   // 语音/助手
+
 
     // 数字键 0-9
     static let num0 = "AAAAAQAAAAEAAABwAw=="
@@ -72,13 +75,13 @@ enum IRCC {
         .init(title: "返回", symbol: "arrow.uturn.left", code: back,     group: .top),
         .init(title: "主页", symbol: "house",            code: home,     group: .top),
         .init(title: "设置", symbol: "gearshape",        code: settings, group: .top),
-        .init(title: "快速设置", symbol: "slider.horizontal.3", code: input, group: .top),
+        .init(title: "输入选择", symbol: "rectangle.on.rectangle", code: input, group: .top),
+        .init(title: "屏显", symbol: "rectangle.expand", code: display, group: .top),
+        .init(title: "菜单", symbol: "ellipsis.circle",  code: menu,    group: .top),
 
         .init(title: "音量-", symbol: "volume.down", code: volumeDown, group: .volume),
         .init(title: "静音",  symbol: "speaker.slash", code: mute,      group: .volume),
         .init(title: "音量+", symbol: "volume.up",   code: volumeUp,   group: .volume),
-
-        .init(title: "语音", symbol: "mic", code: voice, group: .voice),
 
         .init(title: "1", symbol: nil, code: num1, group: .number),
         .init(title: "2", symbol: nil, code: num2, group: .number),
