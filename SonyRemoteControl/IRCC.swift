@@ -33,7 +33,7 @@ enum IRCC {
     static let back        = "AAAAAgAAAJcAAAAjAw=="   // 返回
     static let home        = "AAAAAQAAAAEAAABgAw=="   // 主页
     static let settings    = "AAAAAgAAAJcAAAA2Aw=="   // 设置（Options）
-    static let input       = "AAAAAgAAABEAAAAAA"      // 输入选择（Input 源切换）
+    static let input       = "AAAAAgAAAMQAAABLAw=="   // 快速设置（Quick Settings）
 
     // 电视键：切到电视广播输入（TV / テレビ）
     static let tv          = "AAAAAQAAAAEAAAAkAw=="
@@ -72,7 +72,7 @@ enum IRCC {
         .init(title: "返回", symbol: "arrow.uturn.left", code: back,     group: .top),
         .init(title: "主页", symbol: "house",            code: home,     group: .top),
         .init(title: "设置", symbol: "gearshape",        code: settings, group: .top),
-        .init(title: "输入", symbol: "rectangle.on.rectangle", code: input, group: .top),
+        .init(title: "快速设置", symbol: "slider.horizontal.3", code: input, group: .top),
 
         .init(title: "音量-", symbol: "volume.down", code: volumeDown, group: .volume),
         .init(title: "静音",  symbol: "speaker.slash", code: mute,      group: .volume),
