@@ -29,11 +29,19 @@ struct SonyTVClient {
 
         do {
             let (_, response) = try await URLSession.shared.data(for: request)
-            if let http = response as? HTTPURLResponse,
-               !(200...299).contains(http.statusCode) {
+            guard let http = response as? HTTPURLResponse else {
+                return "电视无 HTTP 响应（连接被中断）"
+            }
+            switch http.statusCode {
+            case 200...299:
+                return nil
+            case 401, 403:
+                return "HTTP \(http.statusCode)：电视开启了「IP 控制」认证。请二选一——① 在 App「设置」里填入与电视一致的 Pre-Shared Key；② 到电视「设置 → 网络 → IP 控制 → 认证」改为「关闭」后重连。"
+            case 404:
+                return "HTTP 404：IRCC 地址不可达，请确认 IP 正确、电视已开机且在同一局域网。"
+            default:
                 return "电视返回 HTTP \(http.statusCode)"
             }
-            return nil
         } catch {
             return error.localizedDescription
         }

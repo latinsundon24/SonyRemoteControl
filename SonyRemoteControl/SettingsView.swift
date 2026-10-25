@@ -19,7 +19,7 @@ struct SettingsView: View {
                         .disableAutocorrection(true)
                 }
                 Section("说明") {
-                    Text("在电视「设置 → 网络 → IP 控制」中开启，并确认手机与电视在同一局域网。若电视要求 Pre-Shared Key，请填到上方。")
+                    Text("手机与电视需在同一局域网。若按键提示「HTTP 403/401」，说明电视开启了 IP 控制认证：要么在上方填入与电视一致的 Pre-Shared Key（电视「设置 → 网络 → IP 控制 → 认证 = 普通」时设置），要么把电视「认证」改为「关闭」，即可免 Key 直连。")
                         .font(.footnote)
                         .foregroundColor(.secondary)
                 }
